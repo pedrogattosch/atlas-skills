@@ -5,14 +5,11 @@ description: Cria ou atualiza especificações funcionais persistentes em Markdo
 
 # Atlas Spec
 
-Transformar uma necessidade em uma especificação funcional clara e persistente.
-Quando o usuário solicitar a criação ou atualização de um spec, gravar o
-documento em Markdown. Não escolher a solução técnica nem implementar código.
+Transformar uma necessidade em uma especificação funcional clara e persistente. Quando o usuário solicitar a criação ou atualização de um spec, gravar o documento em Markdown. Não escolher a solução técnica nem implementar código.
 
 ## Contexto do projeto
 
-Quando houver um projeto disponível, consultar as fontes necessárias nesta
-ordem:
+Quando houver um projeto disponível, consultar as fontes necessárias nesta ordem:
 
 1. `README.md`;
 2. documentação e specs relacionados em `docs/`;
@@ -33,9 +30,10 @@ ordem:
 - Não alterar código, testes, configuração, issues, branches ou commits.
 - Quando o usuário pedir apenas explicação, análise ou um rascunho no chat, não criar arquivo até que ele peça para persistir o spec.
 
-## Formato obrigatório
+## Formato do spec
 
-# Título
+```markdown
+# <título>
 
 ## Objetivo
 
@@ -68,3 +66,16 @@ ordem:
 ## Decisões pendentes
 
 Nenhuma decisão pendente.
+```
+
+## Formato da saída
+
+```markdown
+## Resumo
+
+<arquivo criado ou atualizado e o que mudou no spec>
+
+## Decisões pendentes
+
+<decisões que dependem do usuário, ou "Nenhuma decisão pendente.">
+```
