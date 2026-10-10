@@ -1,16 +1,15 @@
 ---
 name: atlas-review
-description: Revisa alterações de código ou documentação em busca de bugs, regressões, riscos de segurança, falhas de validação e cobertura ausente. Use quando o usuário pedir revisão de um diff, pull request, patch ou mudanças locais, ou um título e uma descrição de MR. Não altera arquivos.
+description: Revisa alterações de código ou documentação em busca de bugs, regressões, riscos de segurança, falhas de validação e cobertura ausente. Use quando o usuário pedir revisão de um diff, pull request, merge request, patch ou mudanças locais, ou um título e uma descrição de PR ou MR. Não altera arquivos.
 ---
 
 # Atlas Review
 
-Revisar as alterações solicitadas com foco em problemas concretos que possam afetar comportamento, segurança, dados, compatibilidade ou manutenção. Quando solicitado, redigir um MR com base nas mudanças da branch atual. Não alterar arquivos, criar commits, abrir merge requests ou reescrever o código.
+Revisar as alterações solicitadas com foco em problemas concretos que possam afetar comportamento, segurança, dados, compatibilidade ou manutenção. Quando solicitado, redigir um PR ou MR com base nas mudanças da branch atual. Não alterar arquivos, criar commits, abrir pull requests ou merge requests ou reescrever o código; os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitHub) ou `/atlas-pr` (GitLab).
 
 ## Contexto do projeto
 
-Quando houver um projeto disponível, consultar as fontes necessárias nesta
-ordem:
+Quando houver um projeto disponível, consultar as fontes necessárias nesta ordem:
 
 1. `README.md`;
 2. arquivos relevantes em `docs/`, incluindo um spec relacionado quando existir;
@@ -19,7 +18,7 @@ ordem:
 
 ## Regras obrigatórias
 
-- Escrever todas as respostas em português, com ortografia e acentuação corretas, inclusive títulos, descrições de MR e mensagens de commit. Preservar apenas termos técnicos, nomes de arquivos e os tipos do padrão Conventional Commits. Não usar texto promocional, genérico ou emojis.
+- Escrever todas as respostas em português, com ortografia e acentuação corretas, inclusive títulos e descrições de PR ou MR. Preservar apenas termos técnicos, nomes de arquivos e os tipos do padrão Conventional Commits. Não usar texto promocional, genérico ou emojis.
 - Entender o comportamento existente e o objetivo da mudança antes de apontar um problema.
 - Quando houver um spec relacionado, comparar as alterações com seus critérios de aceite, escopo e restrições.
 - Reportar somente achados concretos, introduzidos pelas alterações ou diretamente afetados por elas.
@@ -30,13 +29,18 @@ ordem:
 - Não assumir que uma alteração está errada só porque é pequena, incomum ou diferente do padrão; apontar o efeito observável e as condições que o produzem.
 - Não inventar cenários, requisitos ou regras de negócio. Quando uma conclusão depender de informação indisponível, declarar a incerteza em vez de registrar um achado.
 - Não propor correção fora do escopo do achado.
-- Em uma revisão sem achados, escrever exatamente `Nenhum achado. Aprovar.` na seção de achados.
 
-## Formato da revisão
+## Formato da saída
 
-Para cada achado, usar este formato:
+```markdown
+## Achados
 
-`[P<prioridade>] <arquivo>:<linha> — <problema e impacto>. <cenário que o reproduz ou explica>.`
+- [P<prioridade>] <arquivo>:<linha> — <problema e impacto>. <cenário que o reproduz ou explica>.
+
+## Resumo
+
+<N> achado(s): <quantidade por prioridade>.
+```
 
 Prioridades:
 
@@ -45,33 +49,24 @@ Prioridades:
 - `P2`: problema real com impacto limitado, corrigir em seguida.
 - `P3`: melhoria de robustez com impacto baixo e comprovável.
 
-Após os achados, quando houver algum, finalizar com:
+Em uma revisão sem achados, a seção Achados contém apenas `Nenhum achado. Aprovar.` e a seção Resumo é omitida.
 
-## Resumo
+## Modelo de PR ou MR
 
-`<N> achado(s): <quantidade por prioridade>.`
+Quando o usuário pedir para escrever um PR ou MR, identificar a branch padrão do repositório e compará-la com a branch atual a partir do ancestral comum. Usar o diff e, quando úteis, os commits da branch para descrever apenas as mudanças presentes na comparação. Não incluir achados de revisão, salvo se também forem solicitados.
 
-## Sugestões de commit
+Escrever o título no formato de commit do `atlas-commit`, resumindo a branch inteira. Preencher a descrição com o template do repositório, quando existir (`.github/pull_request_template.md` no GitHub ou `.gitlab/merge_request_templates/Default.md` no GitLab); senão, usar o template em `../atlas-mr/template.md`, seguindo as mesmas regras de preenchimento do `atlas-mr`.
 
-Forneça sugestões de commit somente quando o usuário solicitar. Nesse caso, apresente comandos concretos de `git add` e `git commit` para os arquivos em escopo. Use caminhos específicos e evite `git add -A` quando houver alterações não relacionadas. Agrupe commits por mudanças coesas quando isso for possível sem incluir alterações fora de escopo.
+Não inventar mudanças, testes ou resultados. Se a branch padrão não puder ser identificada ou a comparação não estiver disponível, informar o impedimento em vez de escrever uma descrição presumida.
 
-Escreva sempre a mensagem no padrão Conventional Commits, com a estrutura `tipo: descrição` ou `tipo(escopo): descrição`. Escolha o tipo apropriado à mudança e comece a descrição em português com um verbo no imperativo, como `adiciona`, `ajusta` ou `remove`. Exemplos: `feat: adiciona filtro de busca` e `docs: ajusta descrição do MR`.
+Usar este formato:
 
-Escreva cada comando em uma única linha, sem barra invertida (`\`) para continuação. Não execute os comandos. Se houver um achado P0 ou P1, deixe explícito que ele deve ser corrigido e a revisão repetida antes de executar os comandos sugeridos.
+```markdown
+## Título
 
-## Modelo de MR
+<tipo>(<escopo>): <resumo>
 
-Quando o usuário pedir para escrever um MR, identifique a branch principal do repositório e compare-a com a branch atual a partir do ancestral comum. Use o diff e, quando úteis, os commits da branch para descrever apenas as mudanças presentes na comparação. Não inclua achados de revisão nem sugestões de commit, salvo se também forem solicitados.
+## Descrição
 
-Use este formato:
-
-### Título
-
-<título curto que resuma a mudança principal>
-
-### Descrição
-
-- <mudança relevante e seu efeito>
-- <outra mudança relevante, se houver>
-
-Adapte a quantidade de bullets ao conteúdo real do diff. Não invente mudanças, testes ou resultados. Se a branch principal não puder ser identificada ou a comparação não estiver disponível, informe o impedimento em vez de escrever uma descrição presumida.
+<template preenchido>
+```
