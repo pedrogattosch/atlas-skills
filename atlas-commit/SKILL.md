@@ -36,7 +36,7 @@ Usar o padrão Conventional Commits, em português:
 - Resumo com verbo no presente (`adiciona`, `corrige`, `remove`), minúsculo, sem ponto final, com até 72 caracteres.
 - Escopo com o módulo ou área afetada (`auth`, `api`, `ui`). Omitir se não houver um claro.
 - Corpo somente quando o motivo não for óbvio pelo resumo, com linhas de até cerca de 72 colunas.
-- Mudança incompatível: `!` depois do tipo (`feat(api)!: ...`) e rodapé `BREAKING CHANGE: <explicação>`.
+- Não usar `!` depois do tipo nem rodapé `BREAKING CHANGE`. Quando uma mudança for incompatível, explicar o impacto no corpo.
 
 ## Passos
 
