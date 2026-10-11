@@ -20,7 +20,7 @@ Opções e dica do usuário (opcional): $ARGUMENTS
 - Se uma mudança parecer não relacionada à tarefa ou houver dúvida sobre incluí-la, deixá-la fora e avisar.
 - Não incluir atribuição ao Claude ou a ferramentas de IA na mensagem, como `Co-Authored-By: Claude` ou "Generated with Claude Code".
 - Nunca usar `--no-verify`.
-- Não fazer push; em uma branch de tarefa, isso é feito pelo `/atlas-mr` (GitHub) ou `/atlas-pr` (GitLab); com `--main`, o push fica com o usuário.
+- Não fazer push; em uma branch de tarefa, isso é feito pelo `/atlas-mr` (GitLab) ou `/atlas-pr` (GitHub); com `--main`, o push fica com o usuário.
 
 ## Mensagem de commit
 

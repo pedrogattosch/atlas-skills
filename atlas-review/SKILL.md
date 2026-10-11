@@ -5,7 +5,7 @@ description: Revisa alterações de código ou documentação em busca de bugs, 
 
 # Atlas Review
 
-Revisar as alterações solicitadas com foco em problemas concretos que possam afetar comportamento, segurança, dados, compatibilidade ou manutenção. Quando solicitado, redigir um PR ou MR com base nas mudanças da branch atual. Não alterar arquivos, criar commits, abrir pull requests ou merge requests ou reescrever o código; os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitHub) ou `/atlas-pr` (GitLab).
+Revisar as alterações solicitadas com foco em problemas concretos que possam afetar comportamento, segurança, dados, compatibilidade ou manutenção. Quando solicitado, redigir um PR ou MR com base nas mudanças da branch atual. Não alterar arquivos, criar commits, abrir pull requests ou merge requests ou reescrever o código; os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitLab) ou `/atlas-pr` (GitHub).
 
 ## Contexto do projeto
 

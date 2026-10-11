@@ -31,7 +31,7 @@ Antes de executar, consultar as fontes necessárias nesta ordem:
 - Não criar testes para mudanças puramente estruturais, de texto, rótulo, configuração ou constante sem regra associada.
 - Em documentação .md, manter cada parágrafo em uma linha, sem hard wrap, preservando idioma, títulos, nomes, organização e conteúdo de blocos de código.
 - Usar informações do repositório quando necessárias para compreender a entrega e preservar mudanças não relacionadas do usuário.
-- Não incluir em stage, commitar, enviar alterações, abrir pull request ou atualizar issue. Os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitHub) ou `/atlas-pr` (GitLab).
+- Não incluir em stage, commitar, enviar alterações, abrir pull request ou atualizar issue. Os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitLab) ou `/atlas-pr` (GitHub).
 - Atender todas as validações planejadas. Se alguma não puder ser atendida, informar qual ficou pendente e o motivo.
 - Em correções posteriores, modificar somente o necessário e preservar o que já estiver correto.
 

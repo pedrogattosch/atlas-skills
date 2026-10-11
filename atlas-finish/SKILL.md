@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # Atlas Finish
 
-Encerrar uma tarefa cujo MR (GitHub) ou PR (GitLab) já foi mergeado. Não alterar código.
+Encerrar uma tarefa cujo MR (GitLab) ou PR (GitHub) já foi mergeado. Não alterar código.
 
 Branch informada (opcional): $ARGUMENTS
 
