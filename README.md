@@ -25,9 +25,9 @@ Coleção de skills para conduzir uma entrega de software do início da tarefa �
 atlas-start → atlas-spec (opcional) → atlas-implement → atlas-review → atlas-commit → atlas-mr ou atlas-pr → atlas-finish
 ```
 
-1. No repositório principal, rodar `/atlas-start "descrição da tarefa"`. A skill cria a branch, a worktree em `../<repo>-<slug>` e o `PLAN.md`, sem mostrar o plano no chat.
+1. No repositório principal, rodar `/atlas-start "descrição da tarefa"`, ou `/atlas-start #<número da issue>` quando houver issue, com a descrição opcional como complemento. Com issue, a skill lê a issue no GitLab ou no GitHub e a usa como base do plano. A skill cria a branch, a worktree e o `PLAN.md`, sem mostrar o plano no chat. Sem issue, a branch é `<tipo>/<slug>` e a worktree fica em `../<repo>-<slug>`; com issue, a branch é `<tipo>/<número da issue>-<slug>` e a worktree fica em `../<repo>-<número da issue>`.
 2. Revisar o `PLAN.md` e ajustar o que for preciso direto no arquivo. No trabalho, copiar o conteúdo para a issue.
-3. Abrir uma nova sessão na worktree: `cd ../<repo>-<slug> && claude`.
+3. Abrir uma nova sessão na worktree: `cd <pasta da worktree> && claude`.
 4. Quando a entrega precisar de requisitos documentados, pedir um spec com `atlas-spec`.
 5. Pedir a implementação. Acionar o `atlas-implement` vale como aprovação do `PLAN.md`; ele segue a versão atual do arquivo e o spec.
 6. Pedir uma revisão das mudanças com `atlas-review` e corrigir os achados P0 e P1 antes de seguir.
