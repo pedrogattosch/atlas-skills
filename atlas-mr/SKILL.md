@@ -17,7 +17,9 @@ Opções do usuário: $ARGUMENTS
 - Escrever o título no formato de commit do `atlas-commit`, resumindo a branch inteira. Se houver um único commit, usar o assunto dele.
 - Preencher a descrição com `.gitlab/merge_request_templates/Default.md` do repositório, quando existir; senão, usar o [template](template.md) desta skill.
 - Ao preencher o template: marcar somente os tipos de mudança que se aplicam; em Issue relacionada, usar `Closes #<número>` quando houver issue, identificada pela branch no formato `<tipo>/<número da issue>-<slug>`, pelo `PLAN.md` ou pelos commits, e remover a seção quando não houver; remover Evidências quando não houver o que mostrar; marcar no Checklist apenas o que foi verificado.
+- Escrever listas sem linha em branco entre os itens.
 - Usar como fonte `PLAN.md` (quando existir), as mensagens de commit e o diff. Não inventar mudanças, testes ou resultados.
+- Não registrar dúvidas ou decisões pendentes na descrição. Quando faltar informação, listar as perguntas no terminal e só escrever o MR depois que todas forem respondidas.
 - Não incluir atribuição ao Claude ou a ferramentas de IA no título ou na descrição, como "Generated with Claude Code".
 - Nunca enviar para a branch padrão. Nunca usar `--force`; usar `--force-with-lease` somente se o usuário pedir explicitamente.
 
@@ -29,9 +31,10 @@ Opções do usuário: $ARGUMENTS
 4. Rodar `git fetch origin` e descobrir a branch padrão com `git symbolic-ref --short refs/remotes/origin/HEAD`.
 5. Rodar `git log --oneline <padrão remota>..HEAD` e `git diff --stat <padrão remota>...HEAD`. Se não houver commits, parar.
 6. Rodar `glab mr view <branch> --output json`. Se já houver MR aberto, oferecer apenas `git push`, mostrar o link e parar. Se o `glab` não estiver instalado ou falhar por autenticação, orientar a instalação ou `glab auth login` e parar.
-7. Escrever título e descrição e mostrá-los no formato da aprovação. Esperar o ok.
-8. Rodar `git push -u origin HEAD` e `glab mr create --source-branch <branch> --target-branch <padrão> --title "<título>" --description "$(cat <arquivo temporário>)" --yes [--draft]`. Se o push for rejeitado porque o remoto divergiu, parar e explicar.
-9. Encerrar com o formato da saída.
+7. Se houver dúvidas ou decisões pendentes, listá-las no terminal e esperar todas as respostas.
+8. Escrever título e descrição e mostrá-los no formato da aprovação. Esperar o ok.
+9. Rodar `git push -u origin HEAD` e `glab mr create --source-branch <branch> --target-branch <padrão> --title "<título>" --description "$(cat <arquivo temporário>)" --yes [--draft]`. Se o push for rejeitado porque o remoto divergiu, parar e explicar.
+10. Encerrar com o formato da saída.
 
 ## Formato da aprovação
 

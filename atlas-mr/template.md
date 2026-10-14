@@ -34,6 +34,6 @@ Closes #<número>
 
 - [ ] O código segue o padrão do projeto
 - [ ] Testes adicionados ou atualizados
-- [ ] Testes e linter passando
+- [ ] Testes passando
 - [ ] Documentação atualizada
 - [ ] Sem segredos no diff
