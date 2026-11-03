@@ -1,8 +1,8 @@
 ---
 name: atlas-issue
-description: Abre uma issue no projeto Board da Equipe IA no GitLab e a adiciona ao board Development, com labels de coluna, área, complexidade e prioridade, após aprovação. Use com /atlas-issue "descrição da issue" [--coluna <nome>].
+description: Abre uma issue no projeto Board da Equipe IA no GitLab e a adiciona ao board Development, com labels de coluna, área, complexidade e prioridade, só depois da aprovação do usuário no chat. Use com /atlas-issue "descrição da issue" [--coluna <nome>] ou sempre que o usuário pedir para abrir, criar ou registrar uma issue.
 argument-hint: "\"descrição da issue\" [--coluna <nome>]"
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # Atlas Issue
@@ -30,6 +30,7 @@ Quando o usuário não informar complexidade ou prioridade, sugerir um valor e d
 
 ## Regras obrigatórias
 
+- Nunca criar a issue sem antes mostrar título, labels e descrição no formato da aprovação e receber o ok do usuário no chat. Um pedido como "abre a issue" é o pedido de preparar; a criação só acontece depois do ok. Vale mesmo quando a sessão já discutiu o conteúdo.
 - Escrever título e descrição em português, com ortografia e acentuação corretas, sem texto promocional, genérico ou emojis.
 - Criar título curto e específico, iniciado por verbo no infinitivo (`Corrigir`, `Criar`, `Integrar`), sem prefixo do Conventional Commits.
 - Preencher a descrição com o [template](template.md) desta skill: seções `Contexto`, `O que fazer?` e `Critérios de pronto`, com itens em `* ` sem linha em branco entre eles e cada parágrafo em uma linha, sem hard wrap.
@@ -50,7 +51,7 @@ Quando o usuário não informar complexidade ou prioridade, sugerir um valor e d
 4. Procurar duplicatas com `glab issue list -R <projeto> --search "<termos>"`.
 5. Conferir as labels do projeto e escolher coluna, área, complexidade e prioridade.
 6. Se houver dúvidas ou decisões pendentes, listá-las no terminal e esperar todas as respostas.
-7. Escrever título e descrição e mostrá-los no formato da aprovação. Esperar o ok e aplicar os ajustes pedidos.
+7. Escrever título e descrição e mostrá-los no formato da aprovação. Encerrar a resposta nesse ponto e esperar o ok; aplicar os ajustes pedidos e mostrar de novo até o ok.
 8. Gravar a descrição em um arquivo temporário e rodar `glab issue create -R <projeto> --title "<título>" --description-file <arquivo temporário> --label "<coluna>,<área>,<complexidade>,<prioridade>" --assignee <usuário> --yes`.
 9. Rodar `glab issue view <número> -R <projeto> --output json` e conferir se as quatro labels e o responsável foram aplicados. Se algo faltar, corrigir com `glab issue update`, sem criar a issue de novo.
 10. Encerrar com o formato da saída.

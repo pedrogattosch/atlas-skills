@@ -26,7 +26,7 @@ Coleção de skills para conduzir uma entrega de software do início da tarefa �
 atlas-issue (opcional) → atlas-start → atlas-spec (opcional) → atlas-implement → atlas-review → atlas-commit → atlas-mr ou atlas-pr → atlas-finish
 ```
 
-1. Quando a tarefa ainda não tiver issue, abrir uma com `/atlas-issue "descrição da issue"`.
+1. Quando a tarefa ainda não tiver issue, abrir uma com `/atlas-issue "descrição da issue"`. A skill mostra a issue e só a cria depois do ok no chat.
 2. No repositório principal, rodar `/atlas-start "descrição da tarefa"`, ou `/atlas-start #<número da issue>` quando houver issue, com a descrição opcional como complemento. Com issue, a skill lê a issue no GitLab ou no GitHub e a usa como base do plano. A skill cria a branch, a worktree e o `PLAN.md`, sem mostrar o plano no chat. Sem issue, a branch é `<tipo>/<slug>` e a worktree fica em `../<repo>-<slug>`; com issue, a branch é `<tipo>/<número da issue>-<slug>` e a worktree fica em `../<repo>-<número da issue>`.
 3. Revisar o `PLAN.md` e ajustar o que for preciso direto no arquivo. No trabalho, copiar o conteúdo para a issue.
 4. Abrir uma nova sessão na worktree: `cd <pasta da worktree> && claude`.
@@ -34,7 +34,7 @@ atlas-issue (opcional) → atlas-start → atlas-spec (opcional) → atlas-imple
 6. Pedir a implementação. Acionar o `atlas-implement` vale como aprovação do `PLAN.md`; ele segue a versão atual do arquivo e o spec.
 7. Pedir uma revisão das mudanças com `atlas-review` e corrigir os achados P0 e P1 antes de seguir.
 8. Rodar `/atlas-commit`. Os commits são criados automaticamente, separados por assunto.
-9. Rodar `/atlas-mr` no GitLab ou `/atlas-pr` no GitHub (ambos aceitam `--draft`). Aprovar título e descrição; a skill envia a branch e abre o MR ou PR.
+9. Rodar `/atlas-mr` no GitLab ou `/atlas-pr` no GitHub (ambos aceitam `--draft` e `--target <branch>`; sem `--target`, o destino é a branch em que os MRs ou PRs recentes foram mesclados, como `dev`). A skill mostra título, destino e descrição e só envia a branch e abre o MR ou PR depois do ok no chat.
 10. Para ajustes pedidos no MR ou PR, repetir os passos 6 a 9; a skill apenas envia os commits novos ao MR ou PR aberto.
 11. Depois do merge, no repositório principal, rodar `/atlas-finish <branch>` para remover a worktree, a branch local e o `PLAN.md`.
 
