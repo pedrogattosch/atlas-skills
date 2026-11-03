@@ -35,6 +35,7 @@ Opções do usuário: $ARGUMENTS
 5. Rodar `git log --oneline origin/<destino>..HEAD` e `git diff --stat origin/<destino>...HEAD`. Se não houver commits, parar.
 6. Rodar `glab mr view <branch> --output json`. Se já houver MR aberto, oferecer apenas `git push`, mostrar o link e parar. Se o `glab` não estiver instalado ou falhar por autenticação, orientar a instalação ou `glab auth login` e parar.
 7. Se houver dúvidas ou decisões pendentes, listá-las no terminal e esperar todas as respostas.
+7a. Quando o repositório tiver testes de tela (pasta `tests/e2e` ou instrução em `docs/TESTES.md`), rodá-los do jeito que o doc manda antes da aprovação e dizer o resultado nela. Com e2e falhando, parar e corrigir antes de abrir o MR; o CI roda os e2e e um MR aberto com eles quebrados volta.
 8. Escrever título e descrição e mostrá-los no formato da aprovação. Encerrar a resposta nesse ponto e esperar o ok; aplicar os ajustes pedidos e mostrar de novo até o ok.
 9. Rodar `git push -u origin HEAD` e `glab mr create --source-branch <branch> --target-branch <destino> --title "<título>" --description "$(cat <arquivo temporário>)" --yes [--draft]`. Se o push for rejeitado porque o remoto divergiu, parar e explicar.
 10. Encerrar com o formato da saída.
@@ -47,6 +48,7 @@ Opções do usuário: $ARGUMENTS
 - Origem: `<branch>`
 - Destino: `<destino>`
 - Título: `<título>`
+- Testes: <resultado da suíte e dos e2e, ou "o repositório não tem e2e">
 
 <descrição preenchida>
 
