@@ -16,7 +16,7 @@ Opções do usuário: $ARGUMENTS
 - Escrever título e descrição em português, sem texto promocional, genérico ou emojis.
 - Escrever o título no formato de commit do `atlas-commit`, resumindo a branch inteira. Se houver um único commit, usar o assunto dele.
 - Preencher a descrição com `.github/pull_request_template.md` do repositório, quando existir; senão, usar o [template](template.md) desta skill.
-- Ao preencher o template: marcar somente os tipos de mudança que se aplicam; em Issue relacionada, usar `Closes #<número>` quando houver issue, identificada pela branch no formato `<tipo>/<número da issue>-<slug>`, pelo `PLAN.md` ou pelos commits, e remover a seção quando não houver; remover Evidências quando não houver o que mostrar; marcar no Checklist apenas o que foi verificado.
+- Ao preencher o template: em Issue relacionada, usar `Closes #<número>` quando houver issue, identificada pela branch no formato `<tipo>/<número da issue>-<slug>`, pelo `PLAN.md` ou pelos commits, e remover a seção quando não houver; remover Evidências quando não houver o que mostrar; marcar no Checklist apenas o que foi verificado.
 - Escrever listas sem linha em branco entre os itens.
 - Usar como fonte `PLAN.md` (quando existir), as mensagens de commit e o diff. Não inventar mudanças, testes ou resultados.
 - Não registrar dúvidas ou decisões pendentes na descrição. Quando faltar informação, listar as perguntas no terminal e só escrever o PR depois que todas forem respondidas.

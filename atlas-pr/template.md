@@ -6,17 +6,6 @@
 
 Closes #<número>
 
-## Tipo de mudança
-
-- [ ] Nova funcionalidade (`feat`)
-- [ ] Correção de bug (`fix`)
-- [ ] Refatoração (`refactor`)
-- [ ] Melhoria de desempenho (`perf`)
-- [ ] Documentação (`docs`)
-- [ ] Testes (`test`)
-- [ ] Build, CI ou manutenção (`build`, `ci`, `chore`)
-- [ ] Mudança incompatível (breaking change)
-
 ## Mudanças
 
 - <mudança relevante e seu efeito>
