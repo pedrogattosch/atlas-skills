@@ -16,7 +16,8 @@ Opções do usuário: $ARGUMENTS
 - Escrever título e descrição em português, sem texto promocional, genérico ou emojis.
 - Escrever o título no formato de commit do `atlas-commit`, resumindo a branch inteira. Se houver um único commit, usar o assunto dele.
 - Preencher a descrição com `.gitlab/merge_request_templates/Default.md` do repositório, quando existir; senão, usar o [template](template.md) desta skill.
-- Ao preencher o template: marcar somente os tipos de mudança que se aplicam; em Issue relacionada, usar `Closes #<número>` quando houver issue, identificada pela branch no formato `<tipo>/<número da issue>-<slug>`, pelo `PLAN.md` ou pelos commits, e remover a seção quando não houver; remover Evidências quando não houver o que mostrar; marcar no Checklist apenas o que foi verificado.
+- Ao preencher o template: a Descrição é um parágrafo curto com o que muda e por quê; cada item de Mudanças é uma frase, agrupando o que é da mesma tela ou do mesmo recurso; Como testar é uma lista numerada com os passos e o resultado esperado. Só essas três seções: sem tipo de mudança, issue relacionada, evidências ou checklist.
+- Só a primeira letra maiúscula, como no início de uma frase. Termos do domínio ficam em minúscula no meio do texto (notas, atividades, rede, grupo, implantador, financeiro, administrador); maiúscula só em siglas (CSM, API, MRR) e nomes de sistema ou produto (Oráculo, SenseData, Movidesk).
 - Escrever listas sem linha em branco entre os itens.
 - Usar como fonte `PLAN.md` (quando existir), as mensagens de commit e o diff. Não inventar mudanças, testes ou resultados.
 - Não registrar dúvidas ou decisões pendentes na descrição. Quando faltar informação, listar as perguntas no terminal e só escrever o MR depois que todas forem respondidas.
