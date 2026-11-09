@@ -1,7 +1,7 @@
 ---
 name: atlas-finish
-description: Limpa uma tarefa já mergeada no GitHub ou no GitLab, removendo a worktree, apagando a branch local e atualizando a branch padrão. Use com /atlas-finish [branch].
-argument-hint: "[nome da branch]"
+description: Limpa uma ou mais tarefas já mergeadas no GitHub ou no GitLab, removendo a worktree, apagando a branch local e atualizando a branch padrão. Use com /atlas-finish [branch, worktree ou issue ...].
+argument-hint: "[branch, worktree ou número da issue ...]"
 disable-model-invocation: true
 ---
 
@@ -9,7 +9,9 @@ disable-model-invocation: true
 
 Encerrar uma tarefa cujo MR (GitLab) ou PR (GitHub) já foi mergeado. Não alterar código.
 
-Branch informada (opcional): $ARGUMENTS
+Alvos informados (opcional): $ARGUMENTS
+
+Cada alvo pode ser o nome da branch, a pasta ou o caminho da worktree, ou o número da issue (`332`, `#332`). Vários alvos são tratados um a um.
 
 ## Regras obrigatórias
 
@@ -20,14 +22,18 @@ Branch informada (opcional): $ARGUMENTS
 
 ## Passos
 
-1. Rodar `git worktree list --porcelain`. A primeira entrada é o repositório principal. Sem branch no argumento, usar a branch da worktree atual e descobrir o caminho da worktree dessa branch.
-2. Se o diretório atual estiver dentro da worktree a ser removida, parar e orientar: `cd <principal> && claude` e rodar `/atlas-finish <branch>` lá.
-3. Identificar a plataforma por `git remote get-url origin`. No GitHub, rodar `gh pr view <branch> --json state,mergedAt,url` e conferir o estado `MERGED`; no GitLab, rodar `glab mr view <branch> --output json` e conferir o estado `merged`. Se não estiver mergeado, mostrar o estado e parar.
+1. Rodar `git worktree list --porcelain`. A primeira entrada é o repositório principal. Resolver cada alvo para o par worktree e branch:
+   - branch: a worktree que está nela;
+   - worktree (pasta ou caminho): a branch dela;
+   - issue: a branch `<tipo>/<número>-*` ou a worktree `<repo>-<número>`.
+   Sem alvo, usar a worktree atual. Se um alvo não resolver ou resolver para mais de um par, mostrar as opções e perguntar.
+2. Se o diretório atual estiver dentro de uma worktree a ser removida, parar e orientar: `cd <principal> && claude` e rodar `/atlas-finish <alvo>` lá.
+3. Identificar a plataforma por `git remote get-url origin`. No GitHub, rodar `gh pr list --head <branch> --state all --json number,state,url`; no GitLab, `glab mr list --source-branch <branch> --all --output json` (o `mr view` quebra quando a branch tem mais de um MR). Vale o MR ou PR mergeado. Sem nenhum mergeado, rodar `git fetch origin` e `git cherry origin/<branch padrão do MR> <branch>`: se todas as linhas vierem com `-`, o conteúdo já está na branch padrão por outro MR ou PR; mostrar isso e tratar como mergeado só com o ok do usuário. Caso contrário, mostrar o estado e parar esse alvo.
 4. Rodar `git -C <worktree> status --porcelain` e `git -C <worktree> log --oneline @{u}..HEAD`. Se houver qualquer pendência, mostrar e parar.
-5. Mostrar o que será removido (pasta da worktree e branch local) e esperar o ok.
-6. Rodar `git worktree remove <worktree>`, `git branch -d <branch>` e `git fetch --prune origin`. Se `branch -d` recusar por "not fully merged" com o MR ou PR mergeado, explicar que isso acontece com squash merge e usar `git branch -D <branch>` após o ok.
+5. Mostrar, em uma lista só, o que será removido de cada alvo (pasta da worktree e branch local) e esperar o ok.
+6. Para cada alvo, rodar `git worktree remove <worktree>` e `git branch -d <branch>`; no fim, `git fetch --prune origin`. Se `branch -d` recusar por "not fully merged" com o MR ou PR mergeado, explicar que isso acontece com squash merge e usar `git branch -D <branch>` após o ok.
 7. Se o repositório principal estiver na branch padrão, rodar `git -C <principal> pull --ff-only`.
-8. Encerrar com o formato da saída, usando `git worktree list` para listar as worktrees restantes.
+8. Encerrar com o formato da saída, um bloco por alvo, usando `git worktree list` para listar as worktrees restantes uma vez no fim.
 
 ## Formato da saída
 
