@@ -30,19 +30,26 @@ Cada alvo pode ser o nome da branch, a pasta ou o caminho da worktree, ou o núm
 2. Se o diretório atual estiver dentro de uma worktree a ser removida, parar e orientar: `cd <principal> && claude` e rodar `/atlas-finish <alvo>` lá.
 3. Identificar a plataforma por `git remote get-url origin`. No GitHub, rodar `gh pr list --head <branch> --state all --json number,state,url`; no GitLab, `glab mr list --source-branch <branch> --all --output json` (o `mr view` quebra quando a branch tem mais de um MR). Vale o MR ou PR mergeado. Sem nenhum mergeado, rodar `git fetch origin` e `git cherry origin/<branch padrão do MR> <branch>`: se todas as linhas vierem com `-`, o conteúdo já está na branch padrão por outro MR ou PR; mostrar isso e tratar como mergeado só com o ok do usuário. Caso contrário, mostrar o estado e parar esse alvo.
 4. Rodar `git -C <worktree> status --porcelain` e `git -C <worktree> log --oneline @{u}..HEAD`. Se houver qualquer pendência, mostrar e parar.
-5. Mostrar, em uma lista só, o que será removido de cada alvo (pasta da worktree e branch local) e esperar o ok.
+5. Pedir o ok exatamente no formato da confirmação, sem mais nenhum texto antes ou depois, e esperar a resposta.
 6. Para cada alvo, rodar `git worktree remove <worktree>` e `git branch -d <branch>`; no fim, `git fetch --prune origin`. Se `branch -d` recusar por "not fully merged" com o MR ou PR mergeado, explicar que isso acontece com squash merge e usar `git branch -D <branch>` após o ok.
 7. Se o repositório principal estiver na branch padrão, rodar `git -C <principal> pull --ff-only`.
-8. Encerrar com o formato da saída, um bloco por alvo, usando `git worktree list` para listar as worktrees restantes uma vez no fim.
+8. Encerrar com o formato da conclusão. Só acrescentar algo se um passo falhou ou ficou sem fazer (por exemplo, o `pull --ff-only` recusado), em uma linha.
 
-## Formato da saída
+## Formato da confirmação
+
+Um par de linhas de worktree e branch por alvo:
 
 ```markdown
-## Tarefa finalizada
+Não há mudanças pendentes.
 
-- MR/PR: <url do MR ou PR>
-- Worktree removida: `<caminho da worktree>`
-- Branch removida: `<branch>`
-- Branch padrão: <atualizada ou motivo de não atualizar>
-- Worktrees restantes: <lista>
+- Worktree: <caminho da worktree>
+- Branch local: <branch>
+
+Posso remover?
+```
+
+## Formato da conclusão
+
+```markdown
+Tarefa finalizada.
 ```
