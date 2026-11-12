@@ -21,7 +21,7 @@ Antes de executar, consultar as fontes necessárias nesta ordem:
 
 - Executar somente a tarefa solicitada ou planejada. Quando houver um spec relacionado, considerá-lo a fonte de verdade para escopo e comportamento; uma instrução explícita mais recente do usuário prevalece. Se houver conflito entre spec e issue, informar a divergência antes de executar.
 - Considerar o `PLAN.md` aprovado ao ser acionado e ler sempre a versão atual do arquivo, que pode ter sido editada pelo usuário. Se houver decisões pendentes que bloqueiem a execução, perguntar antes de executar.
-- Respeitar o planejamento existente e usar suas etapas como guia técnico, fazendo apenas os pequenos ajustes exigidos pelo código real.
+- Usar o objetivo e as regras de negócio do `PLAN.md` como escopo e decidir a implementação a partir do código real.
 - Inspecionar padrões, arquitetura, camadas, nomes e convenções existentes antes de implementar.
 - Fazer a menor alteração necessária para atender completamente ao objetivo, sem formatação global, funcionalidades futuras, abstrações prematuras ou melhorias fora do escopo.
 - Manter responsabilidades separadas, nomes claros e regras de negócio na camada responsável.
@@ -32,7 +32,7 @@ Antes de executar, consultar as fontes necessárias nesta ordem:
 - Em documentação .md, manter cada parágrafo em uma linha, sem hard wrap, preservando idioma, títulos, nomes, organização e conteúdo de blocos de código.
 - Usar informações do repositório quando necessárias para compreender a entrega e preservar mudanças não relacionadas do usuário.
 - Não incluir em stage, commitar, enviar alterações, abrir pull request ou atualizar issue. Os commits são feitos pelo `/atlas-commit` e a publicação pelo `/atlas-mr` (GitLab) ou `/atlas-pr` (GitHub).
-- Atender todas as validações planejadas. Se alguma não puder ser atendida, informar qual ficou pendente e o motivo.
+- Atender todas as regras de negócio planejadas. Se alguma não puder ser atendida, informar qual ficou pendente e o motivo.
 - Em correções posteriores, modificar somente o necessário e preservar o que já estiver correto.
 
 ## Formato da saída
@@ -48,5 +48,5 @@ Antes de executar, consultar as fontes necessárias nesta ordem:
 
 ## Pendências
 
-<validações planejadas não atendidas e o motivo, ou "Nenhuma pendência.">
+<regras de negócio planejadas não atendidas e o motivo, ou "Nenhuma pendência.">
 ```

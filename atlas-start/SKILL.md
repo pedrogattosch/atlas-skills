@@ -1,13 +1,13 @@
 ---
 name: atlas-start
-description: Começa uma tarefa nova em um projeto, escrevendo o plano técnico, criando a branch e uma worktree separada. Use com /atlas-start [#<número da issue>] ["descrição da tarefa"].
+description: Começa uma tarefa nova em um projeto, escrevendo o plano, criando a branch e uma worktree separada. Use com /atlas-start [#<número da issue>] ["descrição da tarefa"].
 argument-hint: "[#<número da issue>] [\"descrição da tarefa\"]"
 disable-model-invocation: true
 ---
 
 # Atlas Start
 
-Preparar uma tarefa nova: transformar a necessidade em um plano técnico simples e executável, criar a branch e uma worktree separada com o plano salvo em `PLAN.md`. Não implementar código.
+Preparar uma tarefa nova: transformar a necessidade em um plano curto e verificável, criar a branch e uma worktree separada com o plano salvo em `PLAN.md`. Não implementar código.
 
 Tarefa descrita pelo usuário: $ARGUMENTS
 
@@ -36,15 +36,13 @@ Consultar as fontes necessárias nesta ordem:
 ## Regras do plano
 
 - Criar título curto, específico e orientado à mudança, preferencialmente iniciado por verbo no infinitivo.
-- Em Objetivo e Contexto, descrever apenas o resultado esperado, o problema, a motivação e as informações necessárias, sem antecipar a implementação.
+- Em Objetivo, descrever em um parágrafo curto o resultado esperado, o problema, a motivação e o comportamento atual, sem antecipar a implementação: sem lista de arquivos, funções ou números de linha. Citar um detalhe técnico só quando for um risco que a implementação não descobriria sozinha.
 - Não inventar funcionalidades, causas, requisitos, regras de negócio ou escopo. Registrar informação essencial ausente em Decisões pendentes.
 - Quando houver um spec relacionado, tratá-lo como fonte de verdade para escopo e comportamento; uma instrução explícita mais recente do usuário prevalece. Não alterar o spec. Registrar em Decisões pendentes qualquer divergência entre spec e issue.
-- Respeitar a arquitetura, os padrões e as convenções existentes. Não propor arquitetura nova ou refatoração ampla sem necessidade concreta.
-- Criar etapas técnicas detalhadas o suficiente para permitir a implementação sem redesenhar a solução.
-- Converter os comportamentos esperados em validações verificáveis, expressas como resultados observáveis, e não como etapas técnicas.
-- Registrar a menor suposição segura quando houver ambiguidade não bloqueante.
-- Manter o plano focado em uma entrega coesa, sem ampliar o escopo ou adicionar detalhamento artificial.
-- Registrar apenas dúvidas relevantes em Decisões pendentes.
+- Não incluir etapas de implementação; a implementação é decidida pelo `atlas-implement` a partir do código.
+- Em Regras de negócio, registrar as regras que a entrega cria, altera ou remove, uma por linha, escritas como resultado observável que sirva de validação, sem etapas técnicas e sem comandos de teste ou build. Quando houver ambiguidade não bloqueante, registrar a menor suposição segura como regra marcada com "(suposição)".
+- Manter o plano curto e focado em uma entrega coesa, sem repetir informação entre seções, ampliar o escopo ou adicionar detalhamento artificial.
+- Registrar em Decisões pendentes apenas dúvidas que dependem do usuário, não escolhas já feitas.
 
 ## Formato do plano
 
@@ -55,23 +53,14 @@ Branch: `<branch>`
 
 ## Objetivo
 
-<resultado esperado da implementação>
+<parágrafo curto com o resultado esperado, o problema, a motivação e o comportamento atual>
 
-## Contexto
+## Regras de negócio
 
-<problema, motivação, comportamento atual e informações necessárias para orientar a entrega>
-
-## Etapas da implementação
-
-1. <primeiro passo técnico>
-2. <segundo passo técnico>
-
-## Validações
-
-| ID | Validação |
+| ID | Regra |
 | --- | --- |
-| V001 | <primeira validação verificável> |
-| V002 | <segunda validação verificável> |
+| R001 | <primeira regra verificável> |
+| R002 | <segunda regra verificável> |
 
 ## Decisões pendentes
 
@@ -94,13 +83,6 @@ Nenhuma decisão pendente.
 ## Formato da saída
 
 ```markdown
-## Tarefa iniciada
-
 - Branch: `<branch>`
 - Worktree: `<caminho da worktree>`
-- Plano: `<caminho da worktree>/PLAN.md`
-- Arquivos locais copiados: <lista ou "nenhum">
-- Decisões pendentes: <quantidade, ou "nenhuma">
-
-Próximo passo: revisar o `PLAN.md`, abrir `cd <caminho da worktree> && claude` e pedir a implementação.
 ```

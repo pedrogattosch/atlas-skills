@@ -11,7 +11,7 @@ Coleção de skills para conduzir uma entrega de software do início da tarefa �
 | Skill | Uso |
 | --- | --- |
 | `atlas-issue` | Abre uma issue no board Development do GitLab, com as labels de coluna, área, complexidade e prioridade. |
-| `atlas-start` | Escreve o plano técnico da tarefa e cria a branch e uma worktree com o `PLAN.md`. |
+| `atlas-start` | Escreve o plano da tarefa e cria a branch e uma worktree com o `PLAN.md`. |
 | `atlas-spec` | Cria ou atualiza uma especificação funcional persistente em Markdown. |
 | `atlas-implement` | Implementa uma tarefa coesa, respeitando o spec e o plano existentes. |
 | `atlas-review` | Revisa um diff por bugs, regressões, riscos e lacunas de validação. |
