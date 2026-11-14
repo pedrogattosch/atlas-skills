@@ -31,7 +31,8 @@ Consultar as fontes necessárias nesta ordem:
 - Criar a worktree em uma pasta irmã do repositório: `../<repo>-<slug>`, ou `../<repo>-<número da issue>` quando houver issue, onde `<repo>` é o nome da pasta do repositório principal.
 - Não mostrar o plano no chat nem esperar aprovação. O usuário revisa e ajusta o `PLAN.md` diretamente; rodar o `atlas-implement` vale como aprovação.
 - Nunca versionar `PLAN.md`.
-- Não copiar arquivos locais não versionados, como `.env`, sem o ok do usuário.
+- Copiar para a worktree, sem pedir confirmação, os arquivos de ambiente não versionados do repositório principal (`.env`, `.env.*` e equivalentes, em qualquer pasta), exceto os modelos versionados como `.env.example`. Não sobrescrever um arquivo que já exista na worktree. Não copiar outros arquivos não versionados, como dados, planilhas, chaves ou builds.
+- Instalar na worktree, sem pedir confirmação, as dependências necessárias para rodar e testar o projeto, conforme os arquivos de dependências versionados.
 
 ## Regras do plano
 
@@ -77,7 +78,10 @@ Nenhuma decisão pendente.
 6. Ler o contexto do projeto e escrever o plano.
 7. Criar a worktree com `git worktree add <pasta da worktree> -b <branch> <branch padrão remota>`.
 8. Gravar o plano em `PLAN.md` na raiz da worktree e garantir que `PLAN.md` está em `$(git rev-parse --git-common-dir)/info/exclude`, adicionando a linha se faltar.
-9. Se o projeto depender de arquivos não versionados para rodar, perguntar se devem ser copiados para a worktree.
+9. Preparar a worktree para rodar:
+   - listar os arquivos de ambiente ignorados com `git status --short --ignored` no repositório principal e copiá-los para o mesmo caminho na worktree;
+   - instalar as dependências de cada pasta que tiver arquivo de dependências versionado, usando o lockfile quando existir: `npm ci` (`package-lock.json`), `pnpm install --frozen-lockfile`, `yarn install --frozen-lockfile`, `python3 -m venv .venv` seguido de `.venv/bin/pip install -r requirements.txt` ou `.venv/bin/pip install -e .` (`pyproject.toml`), `poetry install`, `uv sync`, `bundle install`, `composer install` ou `go mod download`. Quando o `README.md` indicar outro comando de preparação, segui-lo;
+   - rodar instalações independentes em paralelo. Se alguma falhar, informar o erro na saída e seguir, sem desfazer a worktree.
 10. Encerrar com o formato da saída.
 
 ## Formato da saída
@@ -86,3 +90,5 @@ Nenhuma decisão pendente.
 - Branch: `<branch>`
 - Worktree: `<caminho da worktree>`
 ```
+
+Acrescentar uma linha com o erro de cada instalação que falhou, se houver.

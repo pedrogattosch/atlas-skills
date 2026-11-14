@@ -27,7 +27,7 @@ atlas-issue (opcional) → atlas-start → atlas-spec (opcional) → atlas-imple
 ```
 
 1. Quando a tarefa ainda não tiver issue, abrir uma com `/atlas-issue "descrição da issue"`. A skill mostra a issue e só a cria depois do ok no chat.
-2. No repositório principal, rodar `/atlas-start "descrição da tarefa"`, ou `/atlas-start #<número da issue>` quando houver issue, com a descrição opcional como complemento. Com issue, a skill lê a issue no GitLab ou no GitHub e a usa como base do plano. A skill cria a branch, a worktree e o `PLAN.md`, sem mostrar o plano no chat. Sem issue, a branch é `<tipo>/<slug>` e a worktree fica em `../<repo>-<slug>`; com issue, a branch é `<tipo>/<número da issue>-<slug>` e a worktree fica em `../<repo>-<número da issue>`.
+2. No repositório principal, rodar `/atlas-start "descrição da tarefa"`, ou `/atlas-start #<número da issue>` quando houver issue, com a descrição opcional como complemento. Com issue, a skill lê a issue no GitLab ou no GitHub e a usa como base do plano. A skill cria a branch, a worktree e o `PLAN.md`, sem mostrar o plano no chat, copia os arquivos `.env` não versionados e instala as dependências do projeto na worktree. Sem issue, a branch é `<tipo>/<slug>` e a worktree fica em `../<repo>-<slug>`; com issue, a branch é `<tipo>/<número da issue>-<slug>` e a worktree fica em `../<repo>-<número da issue>`.
 3. Revisar o `PLAN.md` e ajustar o que for preciso direto no arquivo. No trabalho, copiar o conteúdo para a issue.
 4. Abrir uma nova sessão na worktree: `cd <pasta da worktree> && claude`.
 5. Quando a entrega precisar de requisitos documentados, pedir um spec com `atlas-spec`.
